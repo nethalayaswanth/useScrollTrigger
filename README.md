@@ -58,7 +58,7 @@ const App = () => {
 
   return (
     <div {...register({name,onProgress:({node,entry,scrollingUp,progress)=>{
-    node.innerText=progress
+    node.innerHtml=`${progress}`
     }})}>
 <!--       component to track scrollposition in viewport -->
     </div>
