@@ -1,5 +1,5 @@
 
-A React hook that allows you to trigger transitions based on scroll (uses **Intersection observer**).
+A React hook that allows you to trigger transitions based on scroll event (uses **Intersection observer**).
 
 Written in **TypeScript**.
 
