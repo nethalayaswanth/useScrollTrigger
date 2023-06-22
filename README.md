@@ -6,9 +6,9 @@ Written in **TypeScript**.
 ## Install
 
 ```sh
-yarn add useScrollTrigger 
+yarn add usescrolltrigger 
 # or
-npm install useScrollTrigger 
+npm install usescrolltrigger 
 ```
 
 ## Options
@@ -51,7 +51,7 @@ npm install useScrollTrigger
 
 ```tsx
 import React from "react";
-import useScrollTrigger from "useScrollTrigger";
+import useScrollTrigger from "usescrolltrigger ";
 
 const App = () => {
   const { register } =useScrollTrigger<HTMLDivElement>();
