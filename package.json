@@ -1,11 +1,11 @@
 {
-  "name": "react-typescript",
+  "name": "usescrolltrigger",
   "version": "1.0.0",
-  "description": "React and TypeScript example starter project",
+  "description": "A React hook that allows you to trigger transitions based on scroll event (uses Intersection observer). ",
   "keywords": [
     "typescript",
     "react",
-    "starter"
+    "hook","scrolltrigger"
   ],
   "main": "src/index.tsx",
   "dependencies": {
