@@ -6,7 +6,7 @@ import {
   useMemo
 } from "react";
 import { mergeRefs } from "./utils";
-import scrollTrigger, { EventCallbackProps } from "./trigger";
+import ScrollTrigger, { EventCallbackProps } from "./trigger";
 import useStable from "./hooks/useStable";
 import useResolvedElement from "./hooks/useResolvedElement";
 import useResizeObserver, { ResizeHandler } from "./hooks/useResizeObserver";
@@ -47,7 +47,7 @@ export const useScrollTrigger = <T extends HTMLElement>({
     return scroller;
   }, [root]);
 
-  const [trigger] = useState(() => scrollTrigger());
+  const [trigger] = useState(() => new ScrollTrigger());
 
   const onScrollRef = useStable(onScroll);
 
