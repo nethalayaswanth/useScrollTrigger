@@ -1,30 +1,72 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React hook that allows you to trigger transitions based on scroll event (uses **Intersection observer**).
 
-Currently, two official plugins are available:
+Written in **TypeScript**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Install
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```sh
+yarn add usescrolltrigger 
+# or
+npm install usescrolltrigger 
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Options
+
+| Option   | Type                                                                                 | Description                                                                                                                   | Default        |
+| -------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| ref      | undefined &#124; RefObject &#124; HTMLElement                                        | A ref or element to observe.                                                                                                  | undefined      |
+| onScroll     | (e:Event)=>void | undefined | call this handler on scroll
+                                                              
+
+## Response
+
+| Name   | Type                    | Description                                    |
+| ------ | ----------------------- | ---------------------------------------------- |
+| containerRef    | RefCallback             | A callback to be passed to scroller "ref" prop. |
+| register  | (Register)=>RegisterResponse | prop getter to  spread on component to register      |
+
+## Register
+
+| Name   | Type                    | Description                                    |
+| ------ | ----------------------- | ---------------------------------------------- |
+| name    | string(required)            | name for the component to register |
+| start    | string | number           | offset from the bottom of scrollcontainer to trigger start  |
+| end    | string | number              | offset from the bottom of scrollcontainer to trigger end|
+| onStart  | (EventProps)=>void | call when  triggered on start      |
+| onEnd  | (EventProps)=>void | call when reached the end      |
+| onProgress  | (EventProps)=>void | call while progressing from start-end     |
+
+## EventProps
+
+| Name   | Type                    | Description                                    |
+| ------ | ----------------------- | ---------------------------------------------- |
+| node    | HTMLElement          | HTMLElement of the registered component |
+| entry  | IntersectionObserverEntry | Intersection observer entry      |
+| scrollingUp  | boolean | To indicate scrolling direction      |
+| progress  | number | 0 to 1 from start-end     |
+
+## Basic Usage
+
+
+```tsx
+import React from "react";
+import useScrollTrigger from "usescrolltrigger ";
+
+const App = () => {
+  const { register } =useScrollTrigger<HTMLDivElement>();
+
+  return (
+    <div {...register({name,onProgress:({node,entry,scrollingUp,progress)=>{
+    node.innerHtml=`${progress}`
+    }})}>
+<!--       component to track scrollposition in viewport -->
+    </div>
+  );
+};
+```
+
+
+## License
+
+MIT
